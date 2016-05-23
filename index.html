@@ -83,25 +83,19 @@
         <link rel="stylesheet" href="css/wordpress-client.min.css?657d9d0d6b599cfa">
 
     </head>
-    <body>
+    <body ng-controller="MainController">
         <!-- Add your site or application content here -->
-         <p>Hello world! This is an angular web app boilerplate template.</p>
-
         <ul class="menu">
-          <li><a href="#/view1">view1</a></li>
-          <li><a href="#/view2">view2</a></li>
+          <li><a ui-sref="posts">Posts</a></li>
+          <li><a ui-sref="authors">Authors</a></li>
         </ul>
-
-        <div ng-view></div>
-
+        
+        <div ui-view></div>
 
         <!-- DO NOT INCLUDE SCRIPTS HERE, USE GRUNT. README! -->
-        <script src="js/wordpress-client.js?b17a507fe8091c86"></script>
+        <script src="js/wordpress-client.js?85f9f84a2e69db1b"></script>
 
         <!-- HTML5 Polyfil to help screen readers with HTML5 elements https://github.com/yatil/accessifyhtml5.js -->
         <script>AccessifyHTML5();</script>
-
-        <script src="//coast.noaa.gov/js/angulartics.js"></script>
-        <script src="//coast.noaa.gov/js/angulartics-google-analytics.js"></script>
     </body>
 </html>
