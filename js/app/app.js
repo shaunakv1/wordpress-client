@@ -6,6 +6,8 @@ angular.module('myApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
+  'ngAnimate',
+  'angular-loading-bar',
   'myApp.filters',
   'myApp.services',
   'myApp.directives',

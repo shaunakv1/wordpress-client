@@ -2,6 +2,6 @@
 
 <ul>
 	<li ng-repeat="post in vm.posts">
-		{{post.title | sanitize}}
+		<span ng-bind-html="post.title | sanitize"></span>
 	</li>
 </ul>
