@@ -21,7 +21,6 @@ angular.module('myApp.controllers', [])
 		//fetch posts
 		Post.query({ number: 100},function (posts) {
 			vm.posts = posts;
-			console.log(posts);
 		});
 
 	}
