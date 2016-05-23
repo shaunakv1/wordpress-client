@@ -4,6 +4,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
   'ngResource',
+  'ngSanitize',
   'ui.router',
   'myApp.filters',
   'myApp.services',

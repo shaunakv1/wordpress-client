@@ -5,6 +5,7 @@
     "js/lib/angular.min.js",
     "js/lib/angular-resource.min.js",
     "js/lib/angular-ui-router.min.js",
+    "js/lib/angular-sanitize.min.js",
     "js/app/services.js",
     "js/app/controllers.js",
     "js/app/filters.js",

@@ -10,5 +10,19 @@ angular.module('myApp.services', []).
      return window._; // assumes underscore has already been loaded on the page
   })
 .factory('Post', ['$resource',function($resource) {
-  return $resource('https://public-api.wordpress.com/rest/v1.1/sites/geozoneblog.wordpress.com/posts/:id');
+  return $resource('https://public-api.wordpress.com/rest/v1.1/sites/geozoneblog.wordpress.com/posts/:id',{
+  	//parameters
+  	order:'DSC',
+  	orderBy:'date',
+  	number:'@number', //number of posts to fetch. default is 20 for wp
+  	fields:'@fields' //define which fields should be returned
+  },{
+  	query:{
+  		method: 'GET',
+	      isArray: true,
+	      transformResponse: function(data) {
+	        return angular.fromJson(data).posts;
+	    }
+  	}
+  });
 }]);

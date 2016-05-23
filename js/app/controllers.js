@@ -9,7 +9,23 @@ angular.module('myApp.controllers', [])
   }])
   .controller('PostsController', ['$scope','Post',function($scope,Post) {
   	var vm = this;
-  	vm.test = "this is posts controller"
+  	
+	//hoisted variables
+  	vm.posts = [];
+  	
+	//hoisted functions
+  	
+	activate();
+
+	function activate(){
+		//fetch posts
+		Post.query({ number: 100},function (posts) {
+			vm.posts = posts;
+			console.log(posts);
+		});
+
+	}
+  	
 
   }])
   .controller('AuthorsController', ['$scope',function($scope) {
