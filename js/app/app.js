@@ -32,6 +32,12 @@ angular.module('myApp', [
       controller: "PostsController",
       controllerAs: "vm"
     })
+    .state('posts.details', {
+      url: "/:postID/details",
+      templateUrl: "partials/posts/posts.details.html",
+      controller: "PostDetailsController",
+      controllerAs: "vm"
+    })
     /**
      * Authors
      */

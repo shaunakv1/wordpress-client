@@ -2,6 +2,10 @@
 
 <ul>
 	<li ng-repeat="post in vm.posts">
-		<span ng-bind-html="post.title | sanitize"></span>
+		<a ui-sref="posts.details({ postID: post.ID})">
+			<span ng-bind-html="post.title"></span>
+		</a>
 	</li>
 </ul>
+
+<div ui-view></div>

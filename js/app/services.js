@@ -19,8 +19,9 @@ angular.module('myApp.services', []).
   },{
   	query:{
   		method: 'GET',
-	      isArray: true,
-	      transformResponse: function(data) {
+  		cache : true,
+	    isArray: true,
+	    transformResponse: function(data) {
 	        return angular.fromJson(data).posts;
 	    }
   	}

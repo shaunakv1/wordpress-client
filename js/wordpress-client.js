@@ -430,8 +430,9 @@ angular.module('myApp.services', []).
   },{
   	query:{
   		method: 'GET',
-	      isArray: true,
-	      transformResponse: function(data) {
+  		cache : true,
+	    isArray: true,
+	    transformResponse: function(data) {
 	        return angular.fromJson(data).posts;
 	    }
   	}
@@ -443,34 +444,47 @@ angular.module('myApp.services', []).
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainController', ['$scope',function($scope) {
-  	var vm = this;
+	.controller('MainController', ['$scope',function($scope) {
+		var vm = this;
 
-  }])
-  .controller('PostsController', ['$scope','Post',function($scope,Post) {
-  	var vm = this;
-  	
-	//hoisted variables
-  	vm.posts = [];
-  	
-	//hoisted functions
-  	
-	activate();
+	}])
+	.controller('PostsController', ['$scope','Post',function($scope,Post) {
+		var vm = this;
+			
+		//hoisted variables
+			vm.posts = [];
+			
+		//hoisted functions
+			
+		activate();
 
-	function activate(){
-		//fetch posts
-		Post.query({ number: 100},function (posts) {
-			vm.posts = posts;
-		});
+		function activate(){
+			//fetch posts
+			Post.query({ number: 5},function (posts) {
+				vm.posts = posts;
+			});
 
-	}
-  	
+		}
+	}])
+	.controller('PostDetailsController', ['$scope','Post','$stateParams',function($scope,Post, $stateParams) {
+	  	var vm = this;
+	  	
+		//hoisted variables
+	  	vm.postID =  $stateParams.postID;
 
-  }])
-  .controller('AuthorsController', ['$scope',function($scope) {
-  	this.vm = this;
+		//hoisted functions
+	  	
+		activate();
 
-  }]);;
+		function activate(){
+			
+		}
+	  	
+	  }])	
+	.controller('AuthorsController', ['$scope',function($scope) {
+		this.vm = this;
+
+	}]);;
 'use strict';
 
 /* Filters */
@@ -525,6 +539,12 @@ angular.module('myApp', [
       url: "/posts",
       templateUrl: "partials/posts/posts.html",
       controller: "PostsController",
+      controllerAs: "vm"
+    })
+    .state('posts.details', {
+      url: "/:postID/details",
+      templateUrl: "partials/posts/posts.details.html",
+      controller: "PostDetailsController",
       controllerAs: "vm"
     })
     /**
