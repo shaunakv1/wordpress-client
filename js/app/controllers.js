@@ -18,7 +18,7 @@ angular.module('myApp.controllers', [])
 
 		function activate(){
 			//fetch posts
-			Post.get({ number: 5}).then(function (posts) {
+			Post.get({ number: 10}).then(function (posts) {
 				vm.posts = posts;
 			})
 
@@ -43,3 +43,6 @@ angular.module('myApp.controllers', [])
 		this.vm = this;
 
 	}]);
+
+//blog post with broken images
+//http://localhost:3000/#/posts/1273/details

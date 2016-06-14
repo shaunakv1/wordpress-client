@@ -449,7 +449,6 @@ angular.module('myApp.services', []).
     },
     find: function(id){
       return vm.postsPromise.then(function(posts) {
-         console.log(posts);
          return _.find(posts , function(post){ return post.ID.toString() === id })
       }) 
     }
@@ -475,7 +474,7 @@ angular.module('myApp.controllers', [])
 
 		function activate(){
 			//fetch posts
-			Post.get({ number: 5}).then(function (posts) {
+			Post.get({ number: 10}).then(function (posts) {
 				vm.posts = posts;
 			})
 
@@ -499,7 +498,10 @@ angular.module('myApp.controllers', [])
 	.controller('AuthorsController', ['$scope',function($scope) {
 		this.vm = this;
 
-	}]);;
+	}]);
+
+//blog post with broken images
+//http://localhost:3000/#/posts/1273/details;
 'use strict';
 
 /* Filters */

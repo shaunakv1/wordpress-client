@@ -38,7 +38,6 @@ angular.module('myApp.services', []).
     },
     find: function(id){
       return vm.postsPromise.then(function(posts) {
-         console.log(posts);
          return _.find(posts , function(post){ return post.ID.toString() === id })
       }) 
     }
