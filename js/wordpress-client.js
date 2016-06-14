@@ -420,25 +420,41 @@ angular.module('myApp.services', []).
   factory('_', function() {
      return window._; // assumes underscore has already been loaded on the page
   })
-.factory('Post', ['$resource',function($resource) {
-  return $resource('https://public-api.wordpress.com/rest/v1.1/sites/geozoneblog.wordpress.com/posts/:id',{
-  	//parameters
-  	order:'DSC',
-  	orderBy:'date',
-  	number:'@number', //number of posts to fetch. default is 20 for wp
-  	fields:'@fields' //define which fields should be returned
-  },{
-  	query:{
-  		method: 'GET',
-  		cache : true,
-	    isArray: true,
-	    transformResponse: function(data) {
-	        return angular.fromJson(data).posts;
-	    }
-  	}
-  });
-}]);
-;
+.factory('Post', ['$resource','_',function($resource,_) {
+  
+  var vm = this;
+  vm.postsPromise = undefined;
+
+  var service = $resource('https://public-api.wordpress.com/rest/v1.1/sites/geozoneblog.wordpress.com/posts/:id',{
+        //parameters
+        order:'DSC',
+        orderBy:'date',
+        number:'@number', //number of posts to fetch. default is 20 for wp
+        fields:'@fields' //define which fields should be returned
+      },{
+        query:{
+          method: 'GET',
+          cache : true,
+          isArray: true,
+          transformResponse: function(data) {
+              return angular.fromJson(data).posts;
+          }
+        }
+   });
+
+  return {
+    get: function(params){
+       vm.postsPromise = service.query(params).$promise;
+       return vm.postsPromise;
+    },
+    find: function(id){
+      return vm.postsPromise.then(function(posts) {
+         console.log(posts);
+         return _.find(posts , function(post){ return post.ID.toString() === id })
+      }) 
+    }
+  }
+}]);;
 'use strict';
 
 /* Controllers */
@@ -452,33 +468,32 @@ angular.module('myApp.controllers', [])
 		var vm = this;
 			
 		//hoisted variables
-			vm.posts = [];
-			
-		//hoisted functions
-			
+		vm.posts = [];
+		
+		//hoisted functions1
 		activate();
 
 		function activate(){
 			//fetch posts
-			Post.query({ number: 5},function (posts) {
+			Post.get({ number: 5}).then(function (posts) {
 				vm.posts = posts;
-			});
+			})
 
 		}
 	}])
 	.controller('PostDetailsController', ['$scope','Post','$stateParams',function($scope,Post, $stateParams) {
-	  	var vm = this;
-	  	console.log($scope.$parent.posts);	
-		//hoisted variables
-	  	vm.postID =  $stateParams.postID;
-	  	vm.post = $scope.$parent.posts;
-		//hoisted functions
-	  	
-		activate();
-
-		function activate(){
+	  	var vm = this;	  	
 			
-		}
+			//hoisted variables
+	  	vm.postID =  $stateParams.postID;
+
+			activate();
+
+			function activate(){
+				Post.find(vm.postID).then(function (post) {
+					vm.post = post;
+				});
+			}
 	  	
 	  }])	
 	.controller('AuthorsController', ['$scope',function($scope) {
