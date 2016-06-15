@@ -33,7 +33,7 @@ angular.module('myApp', [
      * Posts
      */
     .state('posts', {
-      url: "/posts",
+      url: "/:blogID/posts",
       templateUrl: "views/posts/posts.html",
       controller: "PostsController",
       controllerAs: "vm"

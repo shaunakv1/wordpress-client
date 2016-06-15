@@ -47,7 +47,7 @@ angular.module('myApp.services', []).
          return _.find(posts , function(post){ return post.ID.toString() === id })
       }) 
     },
-    getBlog: function() {
+    isBlogSet: function() {
       return vm.blog;
     },
     setBlog: function(blog) {

@@ -3,8 +3,13 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-	.controller('MainController', ['$scope',function($scope) {
+	.controller('MainController', ['$scope','Post','$state','$rootScope',function($scope,Post,$state,$rootScope) {
 		var vm = this;
+
+		// $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
+		// 	if(!Post.isBlogSet()) $state.go("start");
+		// });
+		
 	}])
 	.controller('StartController', ['$scope','Post','$state',function($scope,Post,$state) {
 		var vm = this;
@@ -16,17 +21,16 @@ angular.module('myApp.controllers', [])
 		vm.setBlog = setBlog;
 
 		$('#blogInputModal').modal({
-		  keyboard: false,
-		  backdrop: false
+			keyboard: false,
+		  	backdrop: false
 		});
 
 		function setBlog() {
 			$('#blogInputModal').modal("hide");
-			Post.setBlog(vm.blog);
-			$state.go("posts");
+			$state.go("posts",{blogID: vm.blog});
 		}
 	}])
-	.controller('PostsController', ['$scope','Post',function($scope,Post) {
+	.controller('PostsController', ['$scope','Post','$stateParams',function($scope,Post,$stateParams) {
 		var vm = this;
 			
 		//hoisted variables
@@ -36,6 +40,8 @@ angular.module('myApp.controllers', [])
 		activate();
 
 		function activate(){
+			Post.setBlog($stateParams.blogID);
+
 			//fetch posts
 			Post.get({ number: 10}).then(function (posts) {
 				vm.posts = posts;
