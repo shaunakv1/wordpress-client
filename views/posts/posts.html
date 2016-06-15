@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-xs-6 col-md-4">
+  	 <div class="list-group">
+  	   <a ui-sref="posts.details({ postID: post.ID})" class="list-group-item" ng-repeat="post in vm.posts">
+  			<span ng-bind-html="post.title"></span>
+  		</a>
+  	 </div>
+  </div>
+  
+  <div class="col-xs-12 col-sm-6 col-md-8">
+  	<div ui-view></div>
+  </div>
+</div>
+
+ 
+
+

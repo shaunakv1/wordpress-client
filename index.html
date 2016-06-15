@@ -80,20 +80,15 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
 
         <!-- Application CSS file -->
-        <link rel="stylesheet" href="css/wordpress-client.min.css?5e6e03aa9f44e914">
+        <link rel="stylesheet" href="css/wordpress-client.min.css?89f39143b24f78ea">
 
     </head>
     <body ng-controller="MainController">
-        <!-- Add your site or application content here -->
-        <ul class="menu">
-          <li><a ui-sref="posts">Posts</a></li>
-          <li><a ui-sref="authors">Authors</a></li>
-        </ul>
         
-        <div ui-view></div>
+        <ng-include src="'/views/layouts/application.html'"></ng-include>
 
         <!-- DO NOT INCLUDE SCRIPTS HERE, USE GRUNT. README! -->
-        <script src="js/wordpress-client.js?23ce6c932376cb85"></script>
+        <script src="js/wordpress-client.js?0d16f63ba603b7c2"></script>
 
         <!-- HTML5 Polyfil to help screen readers with HTML5 elements https://github.com/yatil/accessifyhtml5.js -->
         <script>AccessifyHTML5();</script>

@@ -461,7 +461,9 @@ angular.module('myApp.services', []).
 angular.module('myApp.controllers', [])
 	.controller('MainController', ['$scope',function($scope) {
 		var vm = this;
-
+	}])
+	.controller('StartController', ['$scope',function($scope,Post) {
+		var vm = this;
 	}])
 	.controller('PostsController', ['$scope','Post',function($scope,Post) {
 		var vm = this;
@@ -545,22 +547,28 @@ angular.module('myApp', [
 .config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1
-  $urlRouterProvider.otherwise("/posts");
-  //
+  $urlRouterProvider.otherwise("/start");
+  
   // Now set up the states
   $stateProvider
+    .state('start',{
+      url: "/start",
+      templateUrl: "views/home/home.start.html",
+      controller: "StartController",
+      controllerAs: "vm"
+    })
     /**
      * Posts
      */
     .state('posts', {
       url: "/posts",
-      templateUrl: "partials/posts/posts.html",
+      templateUrl: "views/posts/posts.html",
       controller: "PostsController",
       controllerAs: "vm"
     })
     .state('posts.details', {
       url: "/:postID/details",
-      templateUrl: "partials/posts/posts.details.html",
+      templateUrl: "views/posts/posts.details.html",
       controller: "PostDetailsController",
       controllerAs: "vm"
     })
@@ -569,7 +577,7 @@ angular.module('myApp', [
      */
     .state('authors', {
       url: "/authors",
-      templateUrl: "partials/authors/authors.html",
+      templateUrl: "views/authors/authors.html",
       controller: "AuthorsController",
       controllerAs: "vm"
     });

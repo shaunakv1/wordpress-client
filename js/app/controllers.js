@@ -5,7 +5,9 @@
 angular.module('myApp.controllers', [])
 	.controller('MainController', ['$scope',function($scope) {
 		var vm = this;
-
+	}])
+	.controller('StartController', ['$scope',function($scope,Post) {
+		var vm = this;
 	}])
 	.controller('PostsController', ['$scope','Post',function($scope,Post) {
 		var vm = this;
