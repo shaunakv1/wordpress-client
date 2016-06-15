@@ -12,24 +12,30 @@ angular.module('myApp.services', []).
 .factory('Post', ['$resource','_',function($resource,_) {
   
   var vm = this;
+  var service = undefined;
+  
+  vm.blog = null;
   vm.postsPromise = undefined;
 
-  var service = $resource('https://public-api.wordpress.com/rest/v1.1/sites/geozoneblog.wordpress.com/posts/:id',{
-        //parameters
-        order:'DSC',
-        orderBy:'date',
-        number:'@number', //number of posts to fetch. default is 20 for wp
-        fields:'@fields' //define which fields should be returned
-      },{
-        query:{
-          method: 'GET',
-          cache : true,
-          isArray: true,
-          transformResponse: function(data) {
-              return angular.fromJson(data).posts;
+  vm.setService = function(){
+    service = $resource('https://public-api.wordpress.com/rest/v1.1/sites/'+vm.blog+'.wordpress.com/posts/:id',{
+          //parameters
+          order:'DSC',
+          orderBy:'date',
+          number:'@number', //number of posts to fetch. default is 20 for wp
+          fields:'@fields' //define which fields should be returned
+        },{
+          query:{
+            method: 'GET',
+            cache : true,
+            isArray: true,
+            transformResponse: function(data) {
+                return angular.fromJson(data).posts;
+            }
           }
-        }
-   });
+     });
+  }
+  
 
   return {
     get: function(params){
@@ -40,6 +46,13 @@ angular.module('myApp.services', []).
       return vm.postsPromise.then(function(posts) {
          return _.find(posts , function(post){ return post.ID.toString() === id })
       }) 
+    },
+    getBlog: function() {
+      return vm.blog;
+    },
+    setBlog: function(blog) {
+      vm.blog = blog;
+      vm.setService();
     }
   }
 }]);

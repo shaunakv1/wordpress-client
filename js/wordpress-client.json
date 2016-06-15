@@ -1,5 +1,6 @@
 [
     "js/lib/jquery.min.js",
+    "js/lib/bootstrap.min.js",
     "js/lib/accessifyhtml5.min.js",
     "js/lib/underscore-min.js",
     "js/lib/angular.min.js",

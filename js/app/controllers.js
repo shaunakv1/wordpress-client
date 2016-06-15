@@ -6,8 +6,25 @@ angular.module('myApp.controllers', [])
 	.controller('MainController', ['$scope',function($scope) {
 		var vm = this;
 	}])
-	.controller('StartController', ['$scope',function($scope,Post) {
+	.controller('StartController', ['$scope','Post','$state',function($scope,Post,$state) {
 		var vm = this;
+
+		//hoiested variables
+		vm.blog = "geozoneblog";
+
+		//hoisted functions
+		vm.setBlog = setBlog;
+
+		$('#blogInputModal').modal({
+		  keyboard: false,
+		  backdrop: false
+		});
+
+		function setBlog() {
+			$('#blogInputModal').modal("hide");
+			Post.setBlog(vm.blog);
+			$state.go("posts");
+		}
 	}])
 	.controller('PostsController', ['$scope','Post',function($scope,Post) {
 		var vm = this;
