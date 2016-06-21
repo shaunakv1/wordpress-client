@@ -1,0 +1,20 @@
+<div class="modal blog-input-modal" id="blogInputModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+         <!-- Form to get blog input  -->
+          <form class="form-inline">
+            <div class="form-group">
+              <label class="sr-only" for="inputBlog">Amount (in dollars)</label>
+              <div class="input-group">
+                <div class="input-group-addon">https://</div>
+                <input type="text" class="form-control" id="inputBlog" placeholder="geozone" ng-model="vm.blog">
+                <div class="input-group-addon">.wordpress.com</div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="vm.setBlog()">Go</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
