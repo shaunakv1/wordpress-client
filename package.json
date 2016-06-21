@@ -8,6 +8,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "gh-pages-deploy": "git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
